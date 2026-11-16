@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ course.icon|defualt:'⌘' }} {{ course.title }}</h1>
+
+<div class="lesson-list">
+    {% for lesson in course.lessons.all %}
+    <div class="lesson-card">
+        <h2>{{ lesson.title }}</h2>
+        <p>{{ lesson.description }}</p>
+
+        <a href="{% url 'trainer:lesson_detail' course.slug lesson.slug %}">
+            Открыть урок
+        </a>
+
+        {% if user.is_authenticated %}
+        <a class="button" href="{% url 'trainer:training' course.slug lesson.slug $}">
+            Тренировка
+        </a>
+        <a class="button secondary" href="{% url 'trainer:physical_training' course.slug lesson.slug %}">
+            Физическая тренировка
+        </a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

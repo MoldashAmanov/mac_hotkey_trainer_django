@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ lesson.tite }}{% endblock %}
+
+{% block content %}
+<h1>{{ lesson.title }}</h1>
+
+<table class="hotkey-table">
+    <thead>
+        <tr>
+            <th>Действие</th>
+            <th>Сочетание</th>
+            <th>Объяснение</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hotkey in hotkeys %}
+        <tr>
+            <td>{{ hotkey.action }}</td>
+            <td><code>{{ hotkey.keys }}</code></td>
+            <td>{{ hotkey.explanation }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if user.is_authenticated %}
+<a class="button" href="{% url 'trainer:training' lesson.course.slug lesson.slug %}">
+    Начать тренировку
+</a>
+<a class="button secondary" href="{% url 'trainer:physical_training' lesson.course.slug lesson.slug %}">
+    Тренировка на клавиатуре
+</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Тренировка: {{ lesson.title }}</h1>
+
+<div class="trainer">
+    <div class="question-card">
+        <p>Вопрос <span id="current">1</span> из <span id="total">{{ items|length }}</span></p>
+        <h2 id="action"></h2>
+        <div id="options" class="options"></div>
+        <div id="feedback" class="feedback"></div>
+        <button id="next-button" class="button hidden">Следующий вопрос</button>
+    </div>
+
+    <div id="result-card" class="result-card hidden">
+        <h2>Готово</h2>
+        <p id="result-text"></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const items = {{ items|json_script:'training-data' }};
+    const checkUrl = "{% url 'trainer:api_check_answer' %}";
+</script>
+<script src="{% static 'js/trainer.js' %}"></script>
+{% endblock %}
