@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Профиль</h1>
+
+<div class="stats">
+    <div>Изучено: {{ stats.learned_hotkeys }}</div>
+    <div>Верно: {{ stats.total_correct }}</div>
+    <div>Ошибок: {{ stats.total_wrong }}</div>
+    <div>Точность: {{ stats.accuracy }}</div>
+</div>
+{% endblock %}
