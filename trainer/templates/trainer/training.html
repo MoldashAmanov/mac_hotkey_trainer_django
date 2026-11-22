@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <h1>Тренировка: {{ lesson.title }}</h1>
@@ -20,8 +21,8 @@
 {% endblock %}
 
 {% block scripts %}
+{{ items|json_script:'training-data' }}
 <script>
-    const items = {{ items|json_script:'training-data' }};
     const checkUrl = "{% url 'trainer:api_check_answer' %}";
 </script>
 <script src="{% static 'js/trainer.js' %}"></script>

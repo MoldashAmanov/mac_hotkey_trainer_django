@@ -20,7 +20,7 @@ class SignUpForm(UserCreationForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'slug', 'desription', 'icon', 'order', 'is_published']
+        fields = ['title', 'slug', 'description', 'icon', 'order', 'is_published']
 
 
 class LessonForm(forms.ModelForm):

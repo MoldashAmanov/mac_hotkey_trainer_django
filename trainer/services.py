@@ -19,7 +19,7 @@ def get_course_with_lessons(slug):
 def get_lesson_hotkeys(course_slug, lesson_slug):
     return Hotkey.objects.filter(
         lesson__slug=lesson_slug,
-        lesson_course__slug=course_slug,
+        lesson__course__slug=course_slug,
         lesson__course__is_published=True,
         is_active=True,
     )
@@ -34,7 +34,7 @@ def build_training_set(user, course_slug, lesson_slug, limit=10, physical_only=F
     queryset = queryset.order_by('?')[:limit]
 
     progress_map = {
-        progress.hotkey_id: progress_map
+        progress.hotkey_id: progress
         for progress in UserProgress.objects.filter(
             user=user,
             hotkey__in=queryset,
@@ -48,7 +48,7 @@ def build_training_set(user, course_slug, lesson_slug, limit=10, physical_only=F
             'keys': hotkey.keys,
             'difficulty': hotkey.difficulty,
             'correct': progress_map[hotkey.id].correct_answers if hotkey.id in progress_map else 0,
-            'wrong': progress_map[hotkey.id].wrong_anwers if hotkey.id in progress_map else 0,
+            'wrong': progress_map[hotkey.id].wrong_answers if hotkey.id in progress_map else 0,
         }
         for hotkey in queryset
     ]

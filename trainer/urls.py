@@ -5,7 +5,7 @@ from . import views
 app_name = 'trainer'
 
 urlpatterns = [
-    path('', views.home, hame='home'),
+    path('', views.home, name='home'),
     path('courses/<slug:course_slug>/', views.course_detail, name='course_detail'),
     path(
         'courses/<slug:course_slug>/<slug:lesson_slug>/',
@@ -18,7 +18,7 @@ urlpatterns = [
         name='training',
     ),
     path(
-        'courses/<slug:course_slug/<slug:lesson_slug>/physical-training/',
+        'courses/<slug:course_slug>/<slug:lesson_slug>/physical-training/',
         views.physical_training,
         name='physical_training',
     ),

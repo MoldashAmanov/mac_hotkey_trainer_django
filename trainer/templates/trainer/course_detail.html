@@ -3,7 +3,7 @@
 {% block title %}{{ course.title }}{% endblock %}
 
 {% block content %}
-<h1>{{ course.icon|defualt:'⌘' }} {{ course.title }}</h1>
+<h1>{{ course.icon|default:'⌘' }} {{ course.title }}</h1>
 
 <div class="lesson-list">
     {% for lesson in course.lessons.all %}
@@ -16,7 +16,7 @@
         </a>
 
         {% if user.is_authenticated %}
-        <a class="button" href="{% url 'trainer:training' course.slug lesson.slug $}">
+        <a class="button" href="{% url 'trainer:training' course.slug lesson.slug %}">
             Тренировка
         </a>
         <a class="button secondary" href="{% url 'trainer:physical_training' course.slug lesson.slug %}">
